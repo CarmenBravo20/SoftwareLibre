@@ -1,5 +1,6 @@
 package proyectosoftwarel;
 
+import java.applet.AudioClip;
 import javax.crypto.spec.PSource;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -12,6 +13,10 @@ import javax.swing.JPanel;
 import java.util.Random;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.net.URL;
+import javax.swing.JApplet;
+
 
 
 /**
@@ -55,7 +60,8 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
     int ima2;//cuantas veces se ha mirado esta imagen
     int puntaje=0;//lleva a cabo el puntaje 
     
-    
+   AudioClip sonido;
+
       public Aplicacion() {
     	
         initComponents();
@@ -64,6 +70,9 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+         URL url1 =  this.getClass().getResource("/Audio/Fondo.wav");
+                                   AudioClip sonido = JApplet.newAudioClip(url1);
+                                   sonido.loop(); 
     }
 
   
@@ -72,7 +81,7 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
 
             lblTitulo = new JLabel();
             lblTitulo.setFont(new java.awt.Font("Times New Roman", 0, 20)); 
-            lblTitulo.setText("**JUEGO CONCENTRACION**");
+            lblTitulo.setText("**JUEGO CONCENTRACIÓN**");
             lblTitulo.addMouseListener(this);
             lblTitulo.setVisible(true);
         
@@ -98,6 +107,7 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
         lblImagen1 = new JLabel();
         lblImagen1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pregunta.jpg"))); 
         lblImagen1.setBounds(5, 0, 100, 100);
+        
        
         lblImagen2 = new JLabel();
         lblImagen2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pregunta.jpg")));
@@ -110,7 +120,8 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
         lblImagen4 = new JLabel();
         lblImagen4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pregunta.jpg"))); 
         lblImagen4.setBounds(5, 100, 100, 100);
-
+        
+       
         lblImagen5 = new JLabel();
         lblImagen5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Pregunta.jpg"))); 
         lblImagen5.setBounds(113, 100, 100, 100);
@@ -213,7 +224,6 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
 	            
 	            if(controlarRepeticiones[posicionImagen]<2){
 	                NumeroImagenes[i]=posicionImagen+1;
-	                System.out.print(NumeroImagenes[i]+" , ");
 	            	controlarRepeticiones[posicionImagen]++;
 	            }else{
 	                i--;
@@ -230,8 +240,10 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
 			
 			for (int i = 0; i < 12; i++) {
 				 arregloImagenes[i].setIcon(new ImageIcon(getClass().getResource("/Imagenes/Pregunta.jpg")));
+                                 
 				 arregloImagenes[i].addMouseListener(this);
 			 }
+                        
 		}
 
 //Metodo para que los arreglos empiecen en cero
@@ -245,7 +257,7 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
 		
 		if (NumeroImagenes[valida1]==NumeroImagenes[valida2]) {
 			
-				puntaje+=5;
+				puntaje+=15;
 				lblPuntos.setText(puntaje+"");
 				controlarParejas[valida1]=1;
 				controlarParejas[valida2]=1;	
@@ -277,7 +289,9 @@ public class Aplicacion extends javax.swing.JFrame implements MouseListener{
 					
 					clic++;
 					arregloImagenes[i].setIcon(new ImageIcon(getClass().getResource("/Imagenes/"+NumeroImagenes[i]+".jpg")));
-					if (clic==1) {
+                                        
+					
+                                        if (clic==1) {
 						ima=i;
 					}else{
 						 ima2=i;
